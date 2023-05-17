@@ -63,18 +63,18 @@
 
 	<div class="input-group">
 	  <label for="nombreApellido">Nombre y Apellido:</label>
-	  <input type="text" id="nombreApellido" bind:value="{nombreApellido}" />
+	  <input type="text" id="nombreApellido" bind:value={nombreApellido} />
 	</div>
    <br>
    
 	<div class="input-group">
 	  <label for="dni">DNI:</label>
-	  <input type="text" id="dni" bind:value="{dni}" />
+	  <input type="text" id="dni" bind:value={dni}/>
 	</div>
   
 	<br>
 	
-	<button on:click="{submitForm}">Ingresar</button>
+	<button on:click={submitForm}>Ingresar</button>
   </div>
 
 </body>
