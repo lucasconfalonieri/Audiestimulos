@@ -1,6 +1,6 @@
-import App from './App.svelte';
+import Ingreso from './Ingreso.svelte';
 
-const app = new App({
+const app = new Ingreso({
 	target: document.body,
 });
 
