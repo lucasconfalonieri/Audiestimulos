@@ -1,10 +1,21 @@
 <script>
 	let nombreApellido = "";
 	let dni = "";
-	function submitForm() {
-	  console.log(`Nombre y Apellido: ${nombreApellido}`);
-	  console.log(`DNI: ${dni}`);
-	  // Aquí puedes agregar la lógica adicional que desees para manejar el envío del formulario
+
+	//const APIURL = import.meta.env.API_URL
+
+	function registrarDatos(){
+		fetch(`http://localhost:4000/api/datos/`,
+		{
+			method: 'POST',
+			headers:{'Content-Type': 'application/json'},
+			body: JSON.stringify({dni: dni, nombre: nombreApellido})
+		})
+		.then(res => res.json())
+		.then(apiResponse =>{
+			JSON.stringify(apiResponse)
+			console.log(apiResponse)
+		})
 	}
   </script>
   
@@ -13,6 +24,7 @@
   
 	body {
 	  display: flex;
+	  flex-direction: column;
 	  justify-content: center;
 	  align-items: center;
 	  height: 95vh;
@@ -56,25 +68,36 @@
 	  cursor: pointer;
 	  font-family: 'Montserrat', sans-serif;
 	}
+  
+	.title {
+	  font-size: 40px;
+	  font-weight: bold;
+	  color: #5dd1c7;
+	  margin-bottom: 20px;
+	  font-family: 'Montserrat', sans-serif;
+	}
   </style>
   
   <body>
-  <div class="container">
-
-	<div class="input-group">
-	  <label for="nombreApellido">Nombre y Apellido:</label>
-	  <input type="text" id="nombreApellido" bind:value={nombreApellido} />
-	</div>
-   <br>
-   
-	<div class="input-group">
-	  <label for="dni">DNI:</label>
-	  <input type="text" id="dni" bind:value={dni}/>
-	</div>
-  
+	<div class="title">Audiestimulos</div>
 	<br>
-	
-	<button on:click={submitForm}>Ingresar</button>
-  </div>
-
-</body>
+	<br>
+	<br>
+	<div class="container">
+	  <div class="input-group">
+		<label for="nombreApellido">Nombre y Apellido:</label>
+		<input type="text" id="nombreApellido" bind:value={nombreApellido} />
+	  </div>
+	  <br>
+  
+	  <div class="input-group">
+		<label for="dni">DNI:</label>
+		<input type="text" id="dni" bind:value={dni} />
+	  </div>
+  
+	  <br>
+  
+	  <button on:click={registrarDatos}>Ingresar</button>
+	</div>
+  </body>
+  
