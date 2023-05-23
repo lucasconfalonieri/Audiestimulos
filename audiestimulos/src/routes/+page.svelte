@@ -1,21 +1,28 @@
 <script>
 	let nombreApellido = "";
 	let dni = "";
+	let fail = undefined;
 
-	//const APIURL = import.meta.env.API_URL
+	const APIURL = import.meta.env.VITE_API_URL
+	const WEBURL = import.meta.env.VITE_WEB_URL
 
 	function registrarDatos(){
-		fetch(`http://localhost:4000/api/datos/`,
-		{
-			method: 'POST',
-			headers:{'Content-Type': 'application/json'},
-			body: JSON.stringify({dni: dni, nombre: nombreApellido})
-		})
-		.then(res => res.json())
-		.then(apiResponse =>{
-			JSON.stringify(apiResponse)
-			console.log(apiResponse)
-		})
+		if(nombreApellido != "" && dni != ""){
+			fetch(`${APIURL}/api/datos/`,
+			{
+				method: 'POST',
+				headers:{'Content-Type': 'application/json'},
+				body: JSON.stringify({dni: dni, nombre: nombreApellido})
+			})
+			.then(res => res.json())
+			.then(apiResponse =>{
+				JSON.stringify(apiResponse)
+				console.log(apiResponse)
+			})
+			location.href = `${WEBURL}/deteccion`
+		}else{
+			fail = 1
+		}
 	}
   </script>
   
@@ -88,16 +95,18 @@
 		<label for="nombreApellido">Nombre y Apellido:</label>
 		<input type="text" id="nombreApellido" bind:value={nombreApellido} />
 	  </div>
-	  <br>
-  
+	<br>
 	  <div class="input-group">
 		<label for="dni">DNI:</label>
 		<input type="text" id="dni" bind:value={dni} />
 	  </div>
-  
-	  <br>
-  
+	<br>
 	  <button on:click={registrarDatos}>Ingresar</button>
+	  {#if fail}
+	  	<h3>
+			<strong>Datos no ingresados.</strong>
+	  	</h3> 
+	  {/if}
 	</div>
   </body>
   
