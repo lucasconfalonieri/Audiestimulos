@@ -101,7 +101,7 @@
 		<input type="text" id="dni" bind:value={dni} />
 	  </div>
 	<br>
-	  <button on:click={registrarDatos}>Ingresar</button>
+	  <button on:click={registrarDatos}>Comenzar</button>
 	  {#if fail}
 	  	<h3>
 			<strong>Datos no ingresados.</strong>
