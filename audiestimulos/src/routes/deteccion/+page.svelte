@@ -56,12 +56,12 @@
     <div class="content">
       <div class="level-info">
         <h2>DETECCIÓN</h2>
-        <p>En este nivel el paciente debe poder identificar la presencia de sonido.</p>
+        <p>En este nivel el paciente debe poder identificar la presencia de un sonido.</p>
       </div>
 
       <div class="audio-container">
         <div>
-          <button class="audio-button" on:click={() => playAudio('audio1.mp3')}>
+          <button class="audio-button" on:click={() => playAudio('/audio1-nivel1.mpeg')}>
             <span><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#31356E" class="bi bi-volume-up-fill" viewBox="0 0 16 16">
               <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
               <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
@@ -84,7 +84,7 @@
         </div>
 
         <div>
-          <button class="audio-button" on:click={() => playAudio('audio2.mp3')}>
+          <button class="audio-button" on:click={() => playAudio('/audio2-nivel1.mpeg')}>
             <span><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#31356E" class="bi bi-volume-up-fill" viewBox="0 0 16 16">
               <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
               <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
@@ -220,7 +220,7 @@
   .audio-text {
     text-align: center;
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #31356E;
     background-color: #FFF; 
@@ -241,7 +241,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 0px;
     font-size: 14px;
     padding: 6px 12px;
     border-radius: 4px;
@@ -270,7 +270,7 @@
   .btn-light{
     margin-top: 50px;
     background-color: #68DDD7;
-    color: #FFF;
+    color: #31356E;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     cursor: pointer;
