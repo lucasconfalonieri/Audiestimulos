@@ -351,20 +351,18 @@
 
 	.btn-danger {
 		background-color: #d9534f;
-		color: #fff;
-		padding: 10px;
-		border-radius: 50px;
+		color: white;
+		border-radius: 20px;
+		margin-left: 5px;
 		cursor: pointer;
-		justify-content: center;
-	}
+	}	
 
 	.btn-success {
+		margin-left: 10px;
 		background-color: #5cb85c;
-		margin-left: 5px;
-		color: #fff;
+		color: white;
+		border-radius: 20px;
 		cursor: pointer;
-		border-radius: 50px;
-		justify-content: center;
 	}
 
 	.btn-light {

@@ -29,6 +29,7 @@
 	function nextpage() {
 		goto('/reconocimiento');
 	}
+
 	onMount(() => {
 		// Aquí puedes realizar acciones adicionales cuando el componente se monta
 	});
@@ -55,29 +56,60 @@
 			</div>
 
 			<div class="image-container">
+				<div class="top-text">
                 <p>¿Qué palabra contiene /m/?</p>
-				<div class="left-images">
-					<div class="image">
-						<img src="niño-nivel3.png" alt="Niño" />
-						<p>NIÑO</p>
-					</div>
-					<div class="image">
-						<img src="pelota-nivel3.png" alt="Pelota" />
-						<p>PELOTA</p>
-					</div>
 				</div>
-				<div class="right-images">
-					<div class="image">
-						<img src="camion-nivel3.png" alt="Camión" />
-						<p>CAMIÓN</p>
+				<div class="image-row">
+					<div class="left-images">
+						<div class="image">
+							<img src="niño-nivel3.png" alt="Niño" />
+							<p>NIÑO</p>
+						</div>
+						<div class="image">
+							<img src="pelota-nivel3.png" alt="Pelota" />
+							<p>PELOTA</p>
+						</div>
 					</div>
-					<div class="image">
-						<img src="banana-nivel3.png" alt="Banana" />
-						<p>BANANA</p>
+					<div class="right-images">
+						<div class="image">
+							<p class="bottom-p">CAMIÓN</p>
+							<img src="camion-nivel3.png" alt="Camión" />
+						</div>
+						<div class="image">
+							<p class="bottom-p">BANANA</p>
+							<img src="banana-nivel3.png" alt="Banana" />
+						</div>
 					</div>
 				</div>
 			</div>
 
+			<div class="buttons-container">
+				<p>¿Pudo identificar la palabra?</p>
+				<button type="button" class="btn btn-danger"><span class="material-icons"><svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="18"
+					height="18"
+					fill="currentColor"
+					class="bi bi-x-lg"
+					viewBox="0 0 16 16"
+				>
+					<path
+						d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+					/>
+				</svg></span></button>
+				<button type="button" class="btn btn-success"><span class="material-icons"><svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="18"
+					height="18"
+					fill="currentColor"
+					class="bi bi-check-lg"
+					viewBox="0 0 16 16"
+				>
+					<path
+						d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+					/>
+				</svg></span></button>
+			</div>
 			<button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
 		</div>
 	</div>
@@ -163,28 +195,48 @@
 		color: #fff;
 	}
 
-	.image-container {
+	.top-text {
+		text-align: center;
+		margin-bottom: 10px;
+  	}
+
+  	.top-text p {
+		color: #fff;
+		font-weight: bold;
+		font-size: 16px;
+		margin: 0;
+  	}
+
+  	.image-container {
 		background-color: #fff;
 		display: flex;
-		justify-content: space-around;
+		flex-direction: column;
+		align-items: center;
 		margin-top: 20px;
 		padding: 10px;
 		border-radius: 20px;
-		flex-direction: row;
-		flex-wrap: wrap;
-		align-items: center;
-	}
+  	}
 
-    .image-container p{
-		color: #31356e;
-        font-weight: bold;
+  	.image-row {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 10px;
 	}
 
 	.left-images,
 	.right-images {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: self-start;
+	}
+
+	.right-images p {
+		margin-top: 50px;
+	}
+	
+	.left-images p {
+		margin-top: -30px;
 	}
 
 	.image {
@@ -192,9 +244,8 @@
 		flex-direction: row;
 		align-items: center;
 		text-align: center;
-		justify-content: center;
 		margin-top: 20px;
-        margin-bottom: 10px;
+		margin-bottom: 10px;
 		width: 50%;
 	}
 
@@ -206,11 +257,15 @@
 	}
 
 	.image p {
-		margin: 0;
-		margin-top: 5px;
-        margin-left: 5px;
 		font-size: 16px;
 		color: #000;
+		font-weight: bold;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+    .image-container p{
+		color: #31356e;
         font-weight: bold;
 	}
 
@@ -227,7 +282,7 @@
 	}
 
 	.btn-light {
-		margin-top: 50px;
+		margin-top: 20px;
 		background-color: #b0e9e6;
 		color: #31356e;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -236,5 +291,43 @@
 		border-radius: 10px;
 		justify-content: center;
 		padding: 10px;
+	}
+
+	.buttons-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+	}
+
+	.buttons-container p {
+		margin-right: 10px;
+		color: white;
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	.btn-success {
+		margin-left: 10px;
+		background-color: #5cb85c;
+		color: white;
+		border-radius: 20px;
+		cursor: pointer;
+	}
+
+	.btn-danger {
+		background-color: #d9534f;
+		color: white;
+		border-radius: 20px;
+		margin-left: 20px;
+		cursor: pointer;
+	}
+
+	.btn-success:hover{
+		background-color: #1e7e34;
+	}
+
+	.btn-danger:hover {
+		background-color: #872b34;
 	}
 </style>
