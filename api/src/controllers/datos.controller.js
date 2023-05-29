@@ -1,7 +1,7 @@
 var dbConn = require("./../database/database");
 
 const getPacientes = function(req,res){
-    dbConn.query("SELECT * FROM herramientafono.Pacientes;", function(err,result) {
+    dbConn.query("SELECT * FROM herramientafono.pacientes ORDER by id DESC LIMIT 1;", function(err,result) {
         if(err) {
           console.log(err)
             res.status(409).json({

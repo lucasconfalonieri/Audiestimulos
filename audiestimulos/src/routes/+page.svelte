@@ -26,18 +26,15 @@
 </script>
 
 <body>
+	<img src="/favicon.png" alt="Logo">
 	<div class="title">AUDIESTÍMULOS</div>
-	<br />
-	<br />
-	<br />
-	<div class="container">
 		<div class="input-group">
-			<label for="nombreApellido">Nombre y Apellido:</label>
+			<label for="nombreApellido">Nombre y Apellido</label>
 			<input type="text" id="nombreApellido" bind:value={nombreApellido} />
 		</div>
 		<br />
 		<div class="input-group">
-			<label for="dni">DNI:</label>
+			<label for="dni">DNI</label>
 			<input type="text" id="dni" bind:value={dni} />
 		</div>
 		<br />
@@ -47,7 +44,6 @@
 				<strong>Datos no ingresados.</strong>
 			</h3>
 		{/if}
-	</div>
 </body>
 
 <style>
@@ -63,13 +59,8 @@
 		font-family: 'Montserrat', sans-serif;
 	}
 
-	.container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		background-color: #b2dfdb;
-		padding: 20px;
-		border-radius: 8px;
+	h3{
+		color: #31356e;
 	}
 
 	.input-group {
@@ -81,19 +72,23 @@
 	label {
 		margin-bottom: 5px;
 		font-weight: bold;
+		color: #31356e;
+		font-size: 13px;
 	}
 
 	input {
 		padding: 5px;
 		border: 1px solid #ccc;
-		border-radius: 4px;
+		border-radius: 20px;
 		width: 200px;
+		background-color: #C9E6E0;
 	}
 
 	button {
 		padding: 8px 16px;
-		background-color: #f5f5dc;
-		color: black;
+		margin-top: 10px;
+		background-color: #C9E6E0;
+		color: #31356e;
 		border: none;
 		border-radius: 4px;
 		cursor: pointer;
@@ -101,10 +96,19 @@
 	}
 
 	.title {
-		font-size: 40px;
+		font-size: 35px;
 		font-weight: bold;
 		color: #31356e;
-		margin-bottom: 20px;
+		margin-bottom: 30%;
+		margin-top: 10%;
 		font-family: 'Montserrat', sans-serif;
+	}
+
+	img {
+		width: 150px;
+		height: 150px;
+		object-fit: cover;
+		border-radius: 15%;
+		cursor: pointer;
 	}
 </style>

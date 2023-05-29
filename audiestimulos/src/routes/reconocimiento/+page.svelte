@@ -60,14 +60,66 @@
             <p class="enunciado-text">MI HERMANO SE FUE A DORMIR TEMPRANO</p>
           </div>
         </div>
-  
+        <div class="buttons-container">
+            <p>¿Pudo repetir el enunciado?</p>
+            <button type="button" class="btn btn-danger"><span class="material-icons"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                class="bi bi-x-lg"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+                />
+            </svg></span></button>
+            <button type="button" class="btn btn-success"><span class="material-icons"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                class="bi bi-check-lg"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+                />
+            </svg></span></button>
+        </div>
         <div class="enunciado-content">
           <p class="enunciado-label">SEGUNDO ENUNCIADO</p>
           <div class="enunciado">
             <p class="enunciado-text">MI ABUELA ME ESPERA EN SU CASA</p>
           </div>
         </div>
-  
+        <div class="buttons-container">
+            <p>¿Pudo repetir el enunciado?</p>
+            <button type="button" class="btn btn-danger"><span class="material-icons"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                class="bi bi-x-lg"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+                />
+            </svg></span></button>
+            <button type="button" class="btn btn-success"><span class="material-icons"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                class="bi bi-check-lg"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+                />
+            </svg></span></button>
+        </div>
         <button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
       </div>
     </div>
@@ -164,7 +216,7 @@
       font-size: 10px;
       font-weight: bold;
       color: #FFF;
-      margin-bottom: 2px;
+      margin-bottom: 5px;
     }
   
     .enunciado {
@@ -209,5 +261,43 @@
       justify-content: center;
       padding: 10px;
     }
+
+    .buttons-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 0;
+        margin-bottom: 20px;
+	}
+
+	.buttons-container p {
+		margin-right: 0;
+		color: white;
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	.btn-success {
+		margin-left: 10px;
+		background-color: #5cb85c;
+		color: white;
+		border-radius: 20px;
+		cursor: pointer;
+	}
+
+	.btn-danger {
+		background-color: #d9534f;
+		color: white;
+		border-radius: 20px;
+		margin-left: 20px;
+		cursor: pointer;
+	}
+
+	.btn-success:hover{
+		background-color: #1e7e34;
+	}
+
+	.btn-danger:hover {
+		background-color: #872b34;
+	}
   </style>
-  

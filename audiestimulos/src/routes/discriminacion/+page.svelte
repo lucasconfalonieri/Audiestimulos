@@ -366,7 +366,7 @@
 	}
 
 	.btn-light {
-		margin-top: auto;
+		margin-top: 30px;
 		background-color: #b0e9e6;
 		color: #31356e;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

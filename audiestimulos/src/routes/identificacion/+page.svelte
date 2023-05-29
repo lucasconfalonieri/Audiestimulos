@@ -254,6 +254,7 @@
 		height: 80px;
 		object-fit: cover;
 		border-radius: 15%;
+		cursor: pointer;
 	}
 
 	.image p {
@@ -282,7 +283,7 @@
 	}
 
 	.btn-light {
-		margin-top: 20px;
+		margin-top: 30px;
 		background-color: #b0e9e6;
 		color: #31356e;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
