@@ -29,60 +29,16 @@
     function nextpage() {
       goto('/fin');
     }
-  
+    
+    function playAudio(audioSrc) {
+      const audio = new Audio(audioSrc);
+      audio.play();
+    }
+
     onMount(() => {
       // Aquí puedes realizar acciones adicionales cuando el componente se monta
     });
   
-    let startBox = null;
-    let endBox = null;
-  
-    function handleBoxClick() {
-      if (!startBox) {
-        startBox = this;
-        this.style.backgroundColor = "yellow";
-      } else if (!endBox) {
-        endBox = this;
-        this.style.backgroundColor = "yellow";
-        connectBoxes();
-      }
-    }
-  
-    function connectBoxes() {
-      const startBoxRect = startBox.getBoundingClientRect();
-      const endBoxRect = endBox.getBoundingClientRect();
-  
-      const arrow = document.createElement("div");
-      arrow.classList.add("arrow");
-  
-      if (startBoxRect.top < endBoxRect.top) {
-        arrow.classList.add("down");
-      } else {
-        arrow.classList.add("up");
-      }
-  
-      const startX = startBoxRect.left + startBoxRect.width / 2;
-      const startY = startBoxRect.top + startBoxRect.height / 2;
-      const endX = endBoxRect.left + endBoxRect.width / 2;
-      const endY = endBoxRect.top + endBoxRect.height / 2;
-  
-      const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
-  
-      const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-  
-      arrow.style.left = startX + "px";
-      arrow.style.top = startY + "px";
-      arrow.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-      arrow.style.width = distance + "px";
-  
-      document.body.appendChild(arrow);
-  
-      startBox.style.backgroundColor = "";
-      endBox.style.backgroundColor = "";
-  
-      startBox = null;
-      endBox = null;
-    }
   </script>
   
   <body>
@@ -101,17 +57,74 @@
       <div class="content">
         <div class="level-info">
           <h2>COMPRENSIÓN</h2>
-          <p>En este nivel el paciente debe poder realizar distintas tareas cognitivas del lenguaje.</p>
+          <p>En este nivel el paciente debe poder realizar una tarea cognitiva del lenguaje.</p>
         </div>
-  
-        <div class="boxes">
-            <button class="box" on:click={handleBoxClick} on:keydown={(event) => handleKeyPress(event, 'box1')}></button>
-            <button class="box" on:click={handleBoxClick} on:keydown={(event) => handleKeyPress(event, 'box2')}></button>
+        
+        <p class="ejercicio-label">PRIMER EJERCICIO</p>
+        <p class="text-label">Luego de escuchar el enunciado, unir con flechas.</p>
+        <button class="audio-button" on:click={() => playAudio('/nivel5.mpeg')}>
+          <span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              fill="#31356E"
+              class="bi bi-volume-up-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"
+              />
+              <path
+                d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"
+              />
+              <path
+                d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"
+              />
+            </svg></span
+          >
+        </button>
+        <div class="image-container">
+          <div class="column">
+            <img src="female teacher.png" alt="femaleteacher">
+            <img src="dad necktie.png" alt="dadnecktie">
+            <img src="little girl.png" alt="littlegirl">
+          </div>
+          <div class="column">
+            <img src="beagle.png" alt="beagle">
+            <img src="duo.png" alt="duo">
+            <img src="cat.png" alt="cat">
+          </div>
+        </div> 
+
+        <div class="buttons-container">
+          <p>¿Pudo realizar el ejercicio?</p>
+          <button type="button" class="btn btn-danger"><span class="material-icons"><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-x-lg"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+            />
+          </svg></span></button>
+          <button type="button" class="btn btn-success"><span class="material-icons"><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-check-lg"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+            />
+          </svg></span></button>
         </div>
-          
-          
-  
-        <button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
+        <button type="button" class="btn btn-light" on:click={nextpage}>Finalizar</button>
       </div>
     </div>
   </body>
@@ -194,36 +207,61 @@
       font-size: 14px;
       color: #fff;
     }
-  
-    .boxes {
+
+    .audio-button {
       display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-  
-    .box {
-      width: 100px;
-      height: 100px;
-      background-color: #b0e9e6;
-      margin-right: 10px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #cfefd7;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
+      width: 80px; 
+      height: 60px;
+      margin-bottom: 10px; 
+      align-self: center; 
     }
-  
-    .arrow {
-      position: absolute;
-      height: 4px;
-      background-color: white;
-      z-index: 1;
+
+    .image-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 0;
+      margin-left: 20px;
+      margin-right: 20px;
+      background-color: #fff;
+      border-radius: 50px;
     }
-  
-    .arrow.up {
-      top: 0;
+
+    .column {
+      display: flex;
+      flex-direction: column;
     }
-  
-    .arrow.down {
-      bottom: 0;
+
+    .column img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      border-radius: 20px;
     }
-    
+
+    .text-label {
+      align-items: center;
+      font-size: 12px;
+      margin-left: 60px;
+      margin-top: 3px;
+    }
+
+    .ejercicio-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #FFF;
+      margin-bottom: 0;
+      margin-top: 15px;
+      margin-left: 40px;
+    }
+
     .btn {
       display: flex;
       align-items: center;
@@ -237,7 +275,7 @@
     }
   
     .btn-light {
-      margin-top: 50px;
+      margin-top: 30px;
       background-color: #b0e9e6;
       color: #31356e;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -246,6 +284,44 @@
       border-radius: 10px;
       justify-content: center;
       padding: 10px;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .buttons-container p {
+      margin-right: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .btn-success {
+      margin-left: 10px;
+      background-color: #5cb85c;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .btn-danger {
+      background-color: #d9534f;
+      color: white;
+      border-radius: 20px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .btn-success:hover{
+      background-color: #1e7e34;
+    }
+
+    .btn-danger:hover {
+      background-color: #872b34;
     }
   </style>
   

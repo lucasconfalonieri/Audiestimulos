@@ -3,6 +3,8 @@
 	import { goto } from '$app/navigation';
 
 	let activeTab = 1;
+	let identif1 = 0;
+	let identif2 = 0;
 
 	let levels = [
 		{ id: 1, name: 'Nivel 1', url: '/deteccion' },
@@ -31,11 +33,29 @@
 		audio.play();
 	}
 
+	function cambiarValor(det, num) {
+		localStorage.setItem(det, num)
+		if(det == "detec1"){
+			identif1 = num
+		} else {
+			identif2 = num
+		}
+	}
+
 	function nextpage() {
 		goto('/discriminacion');
 	}
 	onMount(() => {
-		// Aquí puedes realizar acciones adicionales cuando el componente se monta
+		if(localStorage.getItem("detec1")){
+			identif1 = localStorage.getItem("detec1")
+		}else{
+			identif1 = 0
+		}
+		if(localStorage.getItem("detec2")){
+			identif2 = localStorage.getItem("detec2")
+		}else{
+			identif2 = 0
+		}
 	});
 </script>
 
@@ -83,41 +103,92 @@
 							</svg></span
 						>
 					</button>
-					<p class="audio-text">¿Pudo identificar el sonido?</p>
-					<div class="audio-buttons">
-						<button class="btn btn-danger">
-							<span class="glyphicon glyphicon-remove"
-								><svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="18"
-									height="18"
-									fill="currentColor"
-									class="bi bi-x-lg"
-									viewBox="0 0 16 16"
+					{#if identif1 == 0}
+						<p class="audio-text">¿Pudo identificar el sonido?</p>
+					{/if}
+					{#if identif1 == 1}
+						<p class="audio-textok">¿Pudo identificar el sonido?</p>
+					{/if}
+					{#if identif1 == 2}
+						<p class="audio-textno">¿Pudo identificar el sonido?</p>
+					{/if}
+					
+					{#if identif1 == 0}
+						<div class="audio-buttons">
+							<button class="btn btn-danger" on:click={() => cambiarValor("detec1",2)}>
+								<span class="glyphicon glyphicon-remove"
+									><svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										fill="currentColor"
+										class="bi bi-x-lg"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+										/>
+									</svg></span
 								>
-									<path
-										d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
-									/>
-								</svg></span
-							>
-						</button>
-						<button class="btn btn-success">
-							<span class="glyphicon glyphicon-ok"
-								><svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="18"
-									height="18"
-									fill="currentColor"
-									class="bi bi-check-lg"
-									viewBox="0 0 16 16"
+							</button>
+							<button class="btn btn-success" on:click={() => cambiarValor("detec1", 1)}>
+								<span class="glyphicon glyphicon-ok"
+									><svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										fill="currentColor"
+										class="bi bi-check-lg"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+										/>
+									</svg></span
 								>
-									<path
-										d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
-									/>
-								</svg></span
-							>
-						</button>
-					</div>
+							</button>
+						</div>
+					{/if}
+					{#if identif1 == 1}
+						<div class="audio-buttons">
+							<button class="btn btn-success">
+								<span class="glyphicon glyphicon-ok"
+									><svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										fill="currentColor"
+										class="bi bi-check-lg"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+										/>
+									</svg></span
+								>
+							</button>
+						</div>
+					{/if}
+					{#if identif1 == 2}
+						<div class="audio-buttons">
+							<button class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove"
+									><svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										fill="currentColor"
+										class="bi bi-x-lg"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+										/>
+									</svg></span
+								>
+							</button>
+						</div>
+					{/if}
 				</div>
 
 				<div>
@@ -143,24 +214,54 @@
 							</svg></span
 						>
 					</button>
-					<p class="audio-text">¿Pudo identificar el sonido?</p>
-					<div class="audio-buttons">
-						<button class="btn btn-danger">
-							<span class="glyphicon glyphicon-remove"
-								><svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="18"
-									height="18"
-									fill="currentColor"
-									class="bi bi-x-lg"
-									viewBox="0 0 16 16"
+					{#if identif2 == 0}
+						<p class="audio-text">¿Pudo identificar el sonido?</p>
+					{/if}
+					{#if identif2 == 1}
+						<p class="audio-textok">¿Pudo identificar el sonido?</p>
+					{/if}
+					{#if identif2 == 2}
+						<p class="audio-textno">¿Pudo identificar el sonido?</p>
+					{/if}
+
+					{#if identif2 == 0}
+						<div class="audio-buttons">
+							<button class="btn btn-danger" on:click={() => cambiarValor("detec2", 2)}>
+								<span class="glyphicon glyphicon-remove"
+									><svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										fill="currentColor"
+										class="bi bi-x-lg"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+										/>
+									</svg></span
 								>
-									<path
-										d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
-									/>
-								</svg></span
-							>
-						</button>
+							</button>
+							<button class="btn btn-success" on:click={() => cambiarValor("detec2", 1)}>
+								<span class="glyphicon glyphicon-ok"
+									><svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										fill="currentColor"
+										class="bi bi-check-lg"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+										/>
+									</svg></span
+								>
+							</button>
+						</div>
+					{/if}
+					{#if identif2 == 1}
+					<div class="audio-buttons">
 						<button class="btn btn-success">
 							<span class="glyphicon glyphicon-ok"
 								><svg
@@ -178,6 +279,27 @@
 							>
 						</button>
 					</div>
+					{/if}
+					{#if identif2 == 2}
+						<div class="audio-buttons">
+							<button class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove"
+									><svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										fill="currentColor"
+										class="bi bi-x-lg"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+										/>
+									</svg></span
+								>
+							</button>
+						</div>
+					{/if}
 				</div>
 			</div>
 			<button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
@@ -297,6 +419,28 @@
 		font-weight: bold;
 		color: #31356e;
 		background-color: #fff;
+		border-radius: 0 15px 15px 0;
+		padding: 14px 12px;
+	}
+
+	.audio-textok {
+		text-align: center;
+		margin-top: 10px;
+		font-size: 14px;
+		font-weight: bold;
+		color: #31356e;
+		background-color: #5cb85c;
+		border-radius: 0 15px 15px 0;
+		padding: 14px 12px;
+	}
+
+	.audio-textno {
+		text-align: center;
+		margin-top: 10px;
+		font-size: 14px;
+		font-weight: bold;
+		color: #31356e;
+		background-color: #d9534f;
 		border-radius: 0 15px 15px 0;
 		padding: 14px 12px;
 	}
