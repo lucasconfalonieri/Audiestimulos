@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 
 	let activeTab = 3;
+	let ident1 = 0;
 
 	let levels = [
 		{ id: 1, name: 'Nivel 1', url: '/deteccion' },
@@ -30,8 +31,17 @@
 		goto('/reconocimiento');
 	}
 
+	function cambiarValor(det, num) {
+		localStorage.setItem(det, num)
+		ident1 = num
+	}
+
 	onMount(() => {
-		// Aquí puedes realizar acciones adicionales cuando el componente se monta
+		if(localStorage.getItem("ident1")){
+			ident1 = localStorage.getItem("ident1")
+		}else{
+			ident1 = 0
+		}
 	});
 </script>
 
@@ -55,61 +65,128 @@
 				<p>En este nivel el paciente debe elegir la palabra que contenga el fonema solicitado.</p>
 			</div>
 
-			<div class="image-container">
-				<div class="top-text">
-                <p>¿Qué palabra contiene /m/?</p>
-				</div>
-				<div class="image-row">
-					<div class="left-images">
-						<div class="image">
-							<img src="niño-nivel3.png" alt="Niño" />
-							<p>NIÑO</p>
+			{#if ident1 == 0}
+				<div class="image-container">
+					<div class="top-text">
+					<p>¿Qué palabra contiene /m/?</p>
+					</div>
+					<div class="image-row">
+						<div class="left-images">
+							<div class="image">
+								<img src="niño-nivel3.png" alt="Niño" />
+								<p>NIÑO</p>
+							</div>
+							<div class="image">
+								<img src="pelota-nivel3.png" alt="Pelota" />
+								<p>PELOTA</p>
+							</div>
 						</div>
-						<div class="image">
-							<img src="pelota-nivel3.png" alt="Pelota" />
-							<p>PELOTA</p>
+						<div class="right-images">
+							<div class="image">
+								<p class="bottom-p">CAMIÓN</p>
+								<img src="camion-nivel3.png" alt="Camión" />
+							</div>
+							<div class="image">
+								<p class="bottom-p">BANANA</p>
+								<img src="banana-nivel3.png" alt="Banana" />
+							</div>
 						</div>
 					</div>
-					<div class="right-images">
-						<div class="image">
-							<p class="bottom-p">CAMIÓN</p>
-							<img src="camion-nivel3.png" alt="Camión" />
-						</div>
-						<div class="image">
-							<p class="bottom-p">BANANA</p>
-							<img src="banana-nivel3.png" alt="Banana" />
-						</div>
-					</div>
 				</div>
-			</div>
 
-			<div class="buttons-container">
-				<p>¿Pudo identificar la palabra?</p>
-				<button type="button" class="btn btn-danger"><span class="material-icons"><svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="18"
-					height="18"
-					fill="currentColor"
-					class="bi bi-x-lg"
-					viewBox="0 0 16 16"
-				>
-					<path
-						d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
-					/>
-				</svg></span></button>
-				<button type="button" class="btn btn-success"><span class="material-icons"><svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="18"
-					height="18"
-					fill="currentColor"
-					class="bi bi-check-lg"
-					viewBox="0 0 16 16"
-				>
-					<path
-						d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
-					/>
-				</svg></span></button>
-			</div>
+				<div class="buttons-container">
+					<p>¿Pudo identificar la palabra?</p>
+					<button type="button" class="btn btn-danger" on:click={() => cambiarValor("ident1", 2)}><span class="material-icons"><svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						fill="currentColor"
+						class="bi bi-x-lg"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+						/>
+					</svg></span></button>
+					<button type="button" class="btn btn-success" on:click={() => cambiarValor("ident1", 1)}><span class="material-icons"><svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						fill="currentColor"
+						class="bi bi-check-lg"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+						/>
+					</svg></span></button>
+				</div>
+			{/if}
+
+			{#if ident1 == 1 || ident1 == 2}
+				<div class="image-container">
+					<div class="top-text">
+					<p>¿Qué palabra contiene /m/?</p>
+					</div>
+					<div class="image-row">
+						<div class="left-images">
+							<div class="imageno">
+								<img src="niño-nivel3.png" alt="Niño" />
+								<p>NIÑO</p>
+							</div>
+							<div class="imageno">
+								<img src="pelota-nivel3.png" alt="Pelota" />
+								<p>PELOTA</p>
+							</div>
+						</div>
+						<div class="right-images">
+							<div class="imageok">
+								<p class="bottom-p">CAMIÓN</p>
+								<img src="camion-nivel3.png" alt="Camión" />
+							</div>
+							<div class="imageno">
+								<p class="bottom-p">BANANA</p>
+								<img src="banana-nivel3.png" alt="Banana" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{#if ident1 == 1}
+					<div class="buttons-container">
+						<p class = "identok">¿Pudo identificar la palabra?</p>
+						<button type="button" class="btn btn-success" on:click={() => cambiarValor("ident1", 1)}><span class="material-icons"><svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="18"
+							height="18"
+							fill="currentColor"
+							class="bi bi-check-lg"
+							viewBox="0 0 16 16"
+						>
+							<path
+								d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+							/>
+						</svg></span></button>
+					</div>
+				{/if}
+				{#if ident1 == 2}
+				<div class="buttons-container">
+					<p class = "identno">¿Pudo identificar la palabra?</p>
+					<button type="button" class="btn btn-danger" on:click={() => cambiarValor("ident1", 2)}><span class="material-icons"><svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						fill="currentColor"
+						class="bi bi-x-lg"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+						/>
+					</svg></span></button>
+				</div>
+				{/if}
+			{/if}
 			<button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
 		</div>
 	</div>
@@ -239,6 +316,18 @@
 		margin-top: -30px;
 	}
 
+	.identno {
+		background-color: #d9534f;
+		border-radius: 10px;
+		padding: 8px;
+	}
+
+	.identok {
+		background-color: #5cb85c;
+		border-radius: 10px;
+		padding: 8px;
+	}
+
 	.image {
 		display: flex;
 		flex-direction: row;
@@ -247,6 +336,62 @@
 		margin-top: 20px;
 		margin-bottom: 10px;
 		width: 50%;
+	}
+
+	.imageno {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		width: 50%;
+	}
+
+	.imageok {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		width: 50%;
+	}
+
+	.imageno img  {
+		width: 80px;
+		height: 80px;
+		object-fit: cover;
+		border-radius: 15%;
+		cursor: pointer;
+	}
+
+	.imageno p {
+		font-size: 16px;
+		font-weight: bold;
+		margin-left: 5px;
+		margin-right: 5px;
+		background-color: #d9534f;
+		border-radius: 10px;
+		padding: 4px;
+	}
+
+	.imageok img  {
+		width: 80px;
+		height: 80px;
+		object-fit: cover;
+		border-radius: 15%;
+		cursor: pointer;
+	}
+
+	.imageok p {
+		font-size: 16px;
+		font-weight: bold;
+		margin-left: 5px;
+		margin-right: 5px;
+		background-color: #5cb85c;
+		border-radius: 10px;
+		padding: 4px;
 	}
 
 	.image img {
@@ -259,11 +404,11 @@
 
 	.image p {
 		font-size: 16px;
-		color: #000;
 		font-weight: bold;
 		margin-left: 5px;
 		margin-right: 5px;
 	}
+
 
     .image-container p{
 		color: #31356e;
