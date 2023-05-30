@@ -27,7 +27,8 @@
     }
   
     function nextpage() {
-      goto('/fin');
+      // goto('/fin');
+      window.location.href = "/fin";
     }
     
     function playAudio(audioSrc) {

@@ -3,8 +3,7 @@ import morgan from "morgan";
 import datosRoutes from "./routes/datos.routes";
 
 const app = express();
-var cors = require('cors');
-
+var cors = require('cors'); 
 
 app.set("port", 4000);
 

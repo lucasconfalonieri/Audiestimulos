@@ -3,6 +3,8 @@
     import { goto } from '$app/navigation';
   
     let activeTab = 4;
+    let reconom1 = 0;
+    let reconom2 = 0;
   
     let levels = [
       { id: 1, name: 'Nivel 1', url: '/deteccion' },
@@ -29,9 +31,27 @@
     function nextpage() {
       goto('/comprension');
     }
-  
+    
+    function cambiarValor(det, num) {
+      localStorage.setItem(det, num)
+      if(det == "reconom1"){
+        reconom1 = num
+      }else{
+        reconom2 = num
+      }
+    }
+
     onMount(() => {
-      // Aquí puedes realizar acciones adicionales cuando el componente se monta
+      if(localStorage.getItem("reconom1")){
+			  reconom1 = localStorage.getItem("reconom1")
+      }else{
+          reconom1 = 0
+      }
+      if(localStorage.getItem("reconom2")){
+        reconom2 = localStorage.getItem("reconom2")
+      }else{
+        reconom2 = 0
+      }
     });
   </script>
   
@@ -56,13 +76,26 @@
   
         <div class="enunciado-content">
           <p class="enunciado-label">PRIMER ENUNCIADO</p>
-          <div class="enunciado">
+          {#if reconom1 == 0}
+            <div class="enunciado">
+              <p class="enunciado-text">MI HERMANO SE FUE A DORMIR TEMPRANO</p>
+            </div>
+          {/if}
+          {#if reconom1 == 1}
+          <div class="enunciadook">
             <p class="enunciado-text">MI HERMANO SE FUE A DORMIR TEMPRANO</p>
           </div>
+          {/if}
+          {#if reconom1 == 2}
+          <div class="enunciadono">
+            <p class="enunciado-text">MI HERMANO SE FUE A DORMIR TEMPRANO</p>
+          </div>
+          {/if}
         </div>
-        <div class="buttons-container">
+        {#if reconom1 == 0}
+          <div class="buttons-container">
             <p>¿Pudo repetir el enunciado?</p>
-            <button type="button" class="btn btn-danger"><span class="material-icons"><svg
+            <button type="button" class="btn btn-danger" on:click={() => cambiarValor("reconom1", 2)}><span class="material-icons"><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
                 height="18"
@@ -74,6 +107,23 @@
                     d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
                 />
             </svg></span></button>
+            <button type="button" class="btn btn-success" on:click={() => cambiarValor("reconom1", 1)}><span class="material-icons"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                class="bi bi-check-lg"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+                />
+            </svg></span></button>
+          </div>
+        {/if}
+        {#if reconom1 == 1}
+          <div class="buttons-container">
+            <p>¿Pudo repetir el enunciado?</p>
             <button type="button" class="btn btn-success"><span class="material-icons"><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -86,16 +136,48 @@
                     d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
                 />
             </svg></span></button>
-        </div>
+          </div>
+        {/if}
+        {#if reconom1 == 2}
+          <div class="buttons-container">
+            <p>¿Pudo repetir el enunciado?</p>
+            <button type="button" class="btn btn-danger"><span class="material-icons"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              class="bi bi-x-lg"
+              viewBox="0 0 16 16"
+            >
+              <path
+                  d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+              />
+            </svg></span></button>
+          </div>
+        {/if}
+
         <div class="enunciado-content">
           <p class="enunciado-label">SEGUNDO ENUNCIADO</p>
-          <div class="enunciado">
-            <p class="enunciado-text">MI ABUELA ME ESPERA EN SU CASA</p>
-          </div>
+          {#if reconom2 == 0}
+            <div class="enunciado">
+              <p class="enunciado-text">MI ABUELA ME ESPERA EN SU CASA</p>
+            </div>
+          {/if}
+          {#if reconom2 == 1}
+            <div class="enunciadook">
+              <p class="enunciado-text">MI ABUELA ME ESPERA EN SU CASA</p>
+            </div>
+          {/if}
+          {#if reconom2 == 2}
+            <div class="enunciadono">
+              <p class="enunciado-text">MI ABUELA ME ESPERA EN SU CASA</p>
+            </div>
+          {/if}
         </div>
-        <div class="buttons-container">
+        {#if reconom2 == 0}
+          <div class="buttons-container">
             <p>¿Pudo repetir el enunciado?</p>
-            <button type="button" class="btn btn-danger"><span class="material-icons"><svg
+            <button type="button" class="btn btn-danger" on:click={() => cambiarValor("reconom2", 2)}><span class="material-icons"><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
                 height="18"
@@ -107,6 +189,23 @@
                     d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
                 />
             </svg></span></button>
+            <button type="button" class="btn btn-success" on:click={() => cambiarValor("reconom2", 1)}><span class="material-icons"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                class="bi bi-check-lg"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+                />
+            </svg></span></button>
+          </div>
+        {/if}
+        {#if reconom2 == 1}
+          <div class="buttons-container">
+            <p>¿Pudo repetir el enunciado?</p>
             <button type="button" class="btn btn-success"><span class="material-icons"><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -119,7 +218,26 @@
                     d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
                 />
             </svg></span></button>
-        </div>
+          </div>
+        {/if}
+        {#if reconom2 == 2}
+          <div class="buttons-container">
+            <p>¿Pudo repetir el enunciado?</p>
+            <button type="button" class="btn btn-danger"><span class="material-icons"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              class="bi bi-x-lg"
+              viewBox="0 0 16 16"
+          >
+              <path
+                  d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+              />
+          </svg></span></button>
+          </div>
+        {/if}
+
         <button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
       </div>
     </div>
@@ -229,7 +347,29 @@
       align-items: center;
       text-align: center;
     }
-  
+    
+    .enunciadono {
+      background-color: #d9534f;
+      padding: 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .enunciadook {
+      background-color: #5cb85c;
+      padding: 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
     .enunciado-text {
       font-size: 12px;
       color: #000;
@@ -237,7 +377,7 @@
       margin: 0;
       padding: 2px 10px;
     }
-  
+    
     .btn {
       display: flex;
       align-items: center;
