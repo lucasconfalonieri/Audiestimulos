@@ -30,6 +30,7 @@
 	});
 </script>
 
+<title>Fin</title>
 <body>
 	<div class="container">
 		{#if paciente && paciente.length > 0}

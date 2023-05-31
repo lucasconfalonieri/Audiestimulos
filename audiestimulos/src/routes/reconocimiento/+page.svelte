@@ -1,6 +1,13 @@
 <script>
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
+    import { tweened } from 'svelte/motion';
+	  import { cubicOut } from 'svelte/easing';
+
+    const progress = tweened(0, {
+      duration: 400,
+      easing: cubicOut
+    });
   
     let activeTab = 4;
     let reconom1 = 0;
@@ -41,7 +48,13 @@
       }
     }
 
+    function playAudio(audioSrc) {
+      const audio = new Audio(audioSrc);
+      audio.play();
+    }
+
     onMount(() => {
+      localStorage.clear()
       if(localStorage.getItem("reconom1")){
 			  reconom1 = localStorage.getItem("reconom1")
       }else{
@@ -55,6 +68,7 @@
     });
   </script>
   
+  <title>Reconocimiento</title>
   <body>
     <div class="page-container">
       <div class="tabs">
@@ -77,9 +91,28 @@
         <div class="enunciado-content">
           <p class="enunciado-label">PRIMER ENUNCIADO</p>
           {#if reconom1 == 0}
-            <div class="enunciado">
-              <p class="enunciado-text">MI HERMANO SE FUE A DORMIR TEMPRANO</p>
-            </div>
+              <button class="audio-button" on:click={() => playAudio('/audio1-nivel4.mpeg')}>
+                <span
+                  ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40"
+                  height="40"
+                  fill="#31356E"
+                  class="bi bi-volume-up-fill"
+                  viewBox="0 0 16 16"
+                  >
+                  <path
+                    d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"
+                  />
+                  <path
+                    d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"
+                  />
+                  <path
+                    d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"
+                  />
+                  </svg></span
+                >
+              </button>
           {/if}
           {#if reconom1 == 1}
           <div class="enunciadook">
@@ -159,9 +192,28 @@
         <div class="enunciado-content">
           <p class="enunciado-label">SEGUNDO ENUNCIADO</p>
           {#if reconom2 == 0}
-            <div class="enunciado">
-              <p class="enunciado-text">MI ABUELA ME ESPERA EN SU CASA</p>
-            </div>
+            <button class="audio-button" on:click={() => playAudio('/audio2-nivel4.mpeg')}>
+              <span
+                ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#31356E"
+                class="bi bi-volume-up-fill"
+                viewBox="0 0 16 16"
+                >
+                <path
+                  d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"
+                />
+                <path
+                  d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"
+                />
+                <path
+                  d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"
+                />
+                </svg></span
+              >
+            </button>
           {/if}
           {#if reconom2 == 1}
             <div class="enunciadook">
@@ -237,7 +289,7 @@
           </svg></span></button>
           </div>
         {/if}
-
+        <progress value={0.8}></progress>  
         <button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
       </div>
     </div>
@@ -321,7 +373,22 @@
       font-size: 14px;
       color: #fff;
     }
-  
+    
+    .audio-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #cfefd7;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 130px; 
+      height: 60px;
+      margin-bottom: 10px; 
+      align-self: center; 
+    }
+
     .enunciado-content {
       margin-top: 30px;
       display: flex;
@@ -335,17 +402,6 @@
       font-weight: bold;
       color: #FFF;
       margin-bottom: 5px;
-    }
-  
-    .enunciado {
-      background-color: #C9E6E0;
-      padding: 10px;
-      border-radius: 20px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
     
     .enunciadono {
@@ -391,7 +447,7 @@
     }
   
     .btn-light {
-      margin-top: 50px;
+      margin-top: 10px;
       background-color: #b0e9e6;
       color: #31356e;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -439,5 +495,11 @@
 
 	.btn-danger:hover {
 		background-color: #872b34;
+	}
+
+  progress {
+    margin-top: 20px;
+		display: block;
+		width: 100%;
 	}
   </style>

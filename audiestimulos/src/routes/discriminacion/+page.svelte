@@ -1,6 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
+
+    const progress = tweened(0, {
+      duration: 400,
+      easing: cubicOut
+    });
 
 	let activeTab = 2;
 	let disc1 = 0;
@@ -67,6 +74,7 @@
 	});
 </script>
 
+<title>Discriminación</title>
 <body>
 	<div class="page-container">
 		<div class="tabs">
@@ -377,6 +385,7 @@
 					{/if}
 				</div>
 			</div>
+			<progress value={0.4}></progress>
 			<button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
 		</div>
 	</div>
@@ -569,7 +578,7 @@
 	}
 
 	.btn-light {
-		margin-top: 30px;
+		margin-top: 10px;
 		background-color: #b0e9e6;
 		color: #31356e;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -582,5 +591,11 @@
 
 	.glyphicon {
 		margin-right: 5px;
+	}
+
+	progress {
+		margin-top: 30px;
+		display: block;
+		width: 100%;
 	}
 </style>

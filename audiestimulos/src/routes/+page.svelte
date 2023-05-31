@@ -25,6 +25,7 @@
 	}
 </script>
 
+<title>Inicio</title>
 <body>
 	<img src="/favicon.png" alt="Logo">
 	<div class="title">AUDIESTÍMULOS</div>

@@ -1,6 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
+
+    const progress = tweened(0, {
+      duration: 400,
+      easing: cubicOut
+    });
 
 	let activeTab = 3;
 	let ident1 = 0;
@@ -36,6 +43,12 @@
 		ident1 = num
 	}
 
+	    
+    function playAudio(audioSrc) {
+      const audio = new Audio(audioSrc);
+      audio.play();
+    }
+
 	onMount(() => {
 		if(localStorage.getItem("ident1")){
 			ident1 = localStorage.getItem("ident1")
@@ -45,6 +58,7 @@
 	});
 </script>
 
+<title>Identificación</title>
 <body>
 	<div class="page-container">
 		<div class="tabs">
@@ -64,30 +78,48 @@
 				<h2>IDENTIFICACIÓN</h2>
 				<p>En este nivel el paciente debe elegir la palabra que contenga el fonema solicitado.</p>
 			</div>
+			<button class="audio-button" on:click={() => playAudio('/nivel3.mpeg')}>
+				<span
+				  ><svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="40"
+					height="40"
+					fill="#31356E"
+					class="bi bi-volume-up-fill"
+					viewBox="0 0 16 16"
+				  >
+					<path
+					  d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"
+					/>
+					<path
+					  d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"
+					/>
+					<path
+					  d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"
+					/>
+				  </svg></span
+				>
+			</button>
 
 			{#if ident1 == 0}
 				<div class="image-container">
 					<div class="top-text">
 					<p>¿Qué palabra contiene /m/?</p>
 					</div>
-					<div class="image-row">
+					<div class="image-rowin">
 						<div class="left-images">
 							<div class="image">
 								<img src="niño-nivel3.png" alt="Niño" />
-								<p>NIÑO</p>
 							</div>
 							<div class="image">
 								<img src="pelota-nivel3.png" alt="Pelota" />
-								<p>PELOTA</p>
 							</div>
 						</div>
 						<div class="right-images">
 							<div class="image">
-								<p class="bottom-p">CAMIÓN</p>
 								<img src="camion-nivel3.png" alt="Camión" />
 							</div>
 							<div class="image">
-								<p class="bottom-p">BANANA</p>
 								<img src="banana-nivel3.png" alt="Banana" />
 							</div>
 						</div>
@@ -187,6 +219,7 @@
 				</div>
 				{/if}
 			{/if}
+			<progress value={0.6}></progress>
 			<button type="button" class="btn btn-light" on:click={nextpage}>Siguiente nivel</button>
 		</div>
 	</div>
@@ -301,6 +334,13 @@
 		margin-top: 10px;
 	}
 
+	.image-rowin {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 10px;
+	}
+
 	.left-images,
 	.right-images {
 		display: flex;
@@ -315,6 +355,21 @@
 	.left-images p {
 		margin-top: -30px;
 	}
+
+	.audio-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #cfefd7;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 60px; 
+      height: 60px;
+      margin-bottom: 0; 
+      align-self: center; 
+    }
 
 	.identno {
 		background-color: #d9534f;
@@ -335,6 +390,8 @@
 		text-align: center;
 		margin-top: 20px;
 		margin-bottom: 10px;
+		margin-left: 20px;
+		margin-right: 20px;
 		width: 50%;
 	}
 
@@ -402,14 +459,6 @@
 		cursor: pointer;
 	}
 
-	.image p {
-		font-size: 16px;
-		font-weight: bold;
-		margin-left: 5px;
-		margin-right: 5px;
-	}
-
-
     .image-container p{
 		color: #31356e;
         font-weight: bold;
@@ -428,7 +477,7 @@
 	}
 
 	.btn-light {
-		margin-top: 30px;
+		margin-top: 10px;
 		background-color: #b0e9e6;
 		color: #31356e;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -475,5 +524,11 @@
 
 	.btn-danger:hover {
 		background-color: #872b34;
+	}
+
+	progress {
+		margin-top: 30px;
+		display: block;
+		width: 100%;
 	}
 </style>
