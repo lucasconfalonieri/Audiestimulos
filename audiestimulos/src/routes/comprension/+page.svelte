@@ -97,7 +97,7 @@
           <p>En este nivel el paciente debe poder realizar una tarea cognitiva del lenguaje.</p>
         </div>
         
-        <p class="ejercicio-label">PRIMER EJERCICIO</p>
+        <p class="ejercicio-label">EJERCICIO</p>
         <p class="text-label">Luego de escuchar el enunciado, seleccionar la imagen correcta de la columna izquierda y de la columna derecha.</p>
         {#if enun1 == 0}
           <button class="audio-button" on:click={() => playAudio('/nivel5.mp3')}>
