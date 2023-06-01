@@ -91,7 +91,7 @@
         <div class="enunciado-content">
           <p class="enunciado-label">PRIMER ENUNCIADO</p>
           {#if reconom1 == 0}
-              <button class="audio-button" on:click={() => playAudio('/audio1-nivel4.mpeg')}>
+              <button class="audio-button" on:click={() => playAudio('/audio1-nivel4.mp3')}>
                 <span
                   ><svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -192,10 +192,10 @@
         <div class="enunciado-content">
           <p class="enunciado-label">SEGUNDO ENUNCIADO</p>
           {#if reconom2 == 0}
-            <button class="audio-button" on:click={() => playAudio('/audio2-nivel4.mpeg')}>
+            <button class="audio-button" on:click={() => playAudio('/audio2-nivel4.mp3')}>
               <span
                 ><svg
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg" 
                 width="40"
                 height="40"
                 fill="#31356E"

@@ -101,10 +101,10 @@
 
 			<div class="audio-container">
 				<div>
-					<button class="audio-button" on:click={() => playAudio('/K-nivel2.mpeg')}>
+					<button class="audio-button" on:click={() => playAudio('/K-nivel2.mp3')}>
 						<span>K</span>
 					</button>
-					<button class="audio-button" on:click={() => playAudio('/T-nivel2.mpeg')}>
+					<button class="audio-button" on:click={() => playAudio('/T-nivel2.mp3')}>
 						<span>T</span>
 					</button>
 					{#if disc1 == 0}
@@ -196,10 +196,10 @@
 				</div>
 
 				<div>
-					<button class="audio-button" on:click={() => playAudio('/L-nivel2.mpeg')}>
+					<button class="audio-button" on:click={() => playAudio('/L-nivel2.mp3')}>
 						<span>L</span>
 					</button>
-					<button class="audio-button" on:click={() => playAudio('/R-nivel2.mpeg')}>
+					<button class="audio-button" on:click={() => playAudio('/R-nivel2.mp3')}>
 						<span>R</span>
 					</button>
 					{#if disc2 == 0}
@@ -291,10 +291,10 @@
 				</div>
 
 				<div>
-					<button class="audio-button" on:click={() => playAudio('/P-nivel2.mpeg')}>
+					<button class="audio-button" on:click={() => playAudio('/P-nivel2.mp3')}>
 						<span>P</span>
 					</button>
-					<button class="audio-button" on:click={() => playAudio('/B-nivel2.mpeg')}>
+					<button class="audio-button" on:click={() => playAudio('/B-nivel2.mp3')}>
 						<span>B</span>
 					</button>
 					{#if disc3 == 0}

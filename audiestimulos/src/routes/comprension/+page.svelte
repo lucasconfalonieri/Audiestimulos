@@ -71,7 +71,7 @@
         
         <p class="ejercicio-label">PRIMER EJERCICIO</p>
         <p class="text-label">Luego de escuchar el enunciado, unir con flechas.</p>
-        <button class="audio-button" on:click={() => playAudio('/nivel5.mpeg')}>
+        <button class="audio-button" on:click={() => playAudio('/nivel5.mp3')}>
           <span
             ><svg
               xmlns="http://www.w3.org/2000/svg"

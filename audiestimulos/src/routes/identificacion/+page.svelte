@@ -78,7 +78,7 @@
 				<h2>IDENTIFICACIÓN</h2>
 				<p>En este nivel el paciente debe elegir la palabra que contenga el fonema solicitado.</p>
 			</div>
-			<button class="audio-button" on:click={() => playAudio('/nivel3.mpeg')}>
+			<button class="audio-button" on:click={() => playAudio('/nivel3.mp3')}>
 				<span
 				  ><svg
 					xmlns="http://www.w3.org/2000/svg"
