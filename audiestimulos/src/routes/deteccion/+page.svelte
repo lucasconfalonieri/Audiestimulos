@@ -89,7 +89,7 @@
 
 			<div class="audio-container">
 				<div>
-					<button class="audio-button" on:click={() => playAudio('/audio1-nivel1.mpeg')}>
+					<button class="audio-button" on:click={() => playAudio('/audio1-nivel1.mp3')}>
 						<span
 							><svg
 								xmlns="http://www.w3.org/2000/svg"
