@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 import config from "./../config";
 
 const connection = {
@@ -6,7 +6,7 @@ const connection = {
     database: config.database,
     user: config.user,
     password: config.password,
-    port: config.db_port
+    port: config.port
 };
 
 const pool = mysql.createPool(connection);

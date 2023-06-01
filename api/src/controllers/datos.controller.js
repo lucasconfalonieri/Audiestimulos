@@ -1,7 +1,7 @@
 var dbConn = require("./../database/database");
 
 const getPacientes = function(req,res){
-    dbConn.query("SELECT * FROM herramientafono.pacientes ORDER by id DESC LIMIT 1;", function(err,result) {
+    dbConn.query("SELECT * FROM railway.pacientes ORDER by id DESC LIMIT 1;", function(err,result) {
         if(err) {
           console.log(err)
             res.status(409).json({
@@ -21,7 +21,7 @@ const getPacientes = function(req,res){
 
 const getPaciente = function(req,res){
     const { dni } = req.params;
-    dbConn.query("SELECT * FROM herramientafono.Pacientes p where p.dni = ?;", dni ,function(err,result) {
+    dbConn.query("SELECT * FROM railway.Pacientes p where p.dni = ?;", dni ,function(err,result) {
     if(err) {
       console.log(err)
         res.status(409).json({
@@ -44,8 +44,8 @@ const addPaciente = function(req,res){
     if (nombre === undefined || dni === undefined) {
         res.status(400).json({ message: "Bad Request. Please fill all field." });
     }
-    const paciente = { nombre, dni };
-    dbConn.query("INSERT INTO Pacientes SET ?", paciente,function(err,result) {
+    const paciente = { dni, nombre };
+    dbConn.query("INSERT INTO railway.pacientes SET ?", paciente,function(err,result) {
         if(err) {
           console.log(err)
             res.status(409).json({
