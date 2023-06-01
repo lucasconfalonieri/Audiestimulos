@@ -407,7 +407,7 @@
     .text-label {
       align-items: center;
       font-size: 12px;
-      margin-left: 60px;
+      margin-left: 50px;
       margin-top: 3px;
     }
 
