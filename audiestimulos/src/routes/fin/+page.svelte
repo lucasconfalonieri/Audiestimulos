@@ -33,8 +33,8 @@
 <title>Fin</title>
 <body>
 	<div class="container">
+		<div class="title">¡FELICIDADES!</div>
 		{#if paciente && paciente.length > 0}
-			<div class="title">¡FELICIDADES!</div>
 			<h1 class="text">{paciente[0].Nombre}</h1>
 			<div class="text">Lograste el objetivo</div>
 		{/if}
