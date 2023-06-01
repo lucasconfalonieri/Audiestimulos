@@ -18,7 +18,7 @@
 					JSON.stringify(apiResponse);
 					console.log(apiResponse);
 				});
-			location.href = `${WEBURL}/deteccion`;
+			location.href = `/deteccion`;
 		} else {
 			fail = 1;
 		}
