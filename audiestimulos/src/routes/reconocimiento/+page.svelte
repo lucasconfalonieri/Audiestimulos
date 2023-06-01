@@ -54,7 +54,6 @@
     }
 
     onMount(() => {
-      localStorage.clear()
       if(localStorage.getItem("reconom1")){
 			  reconom1 = localStorage.getItem("reconom1")
       }else{

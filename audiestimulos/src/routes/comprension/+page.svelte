@@ -10,6 +10,9 @@
     });
   
     let activeTab = 5;
+    let colum1 = 0;
+    let colum2 = 0;
+    let enun1 = 0;
   
     let levels = [
       { id: 1, name: 'Nivel 1', url: '/deteccion' },
@@ -32,7 +35,18 @@
         changeTab(tabId);
       }
     }
-  
+    
+    function cambiarValor(det, num) {
+      localStorage.setItem(det, num)
+      if(det == "colum1"){
+        colum1 = num
+      }else if(det == "colum2"){
+        colum2 = num
+      }else{
+        enun1 = num
+      }
+    }
+
     function nextpage() {
       // goto('/fin');
       window.location.href = "/fin";
@@ -44,7 +58,21 @@
     }
 
     onMount(() => {
-      // Aquí puedes realizar acciones adicionales cuando el componente se monta
+      if(localStorage.getItem("colum1")){
+			  colum1 = localStorage.getItem("colum1")
+      }else{
+          colum1 = 0
+      }
+      if(localStorage.getItem("colum2")){
+        colum2 = localStorage.getItem("colum2")
+      }else{
+        colum2 = 0
+      }
+      if(localStorage.getItem("enun1")){
+        enun1 = localStorage.getItem("enun1")
+      }else{
+        enun1 = 0
+      }
     });
   
   </script>
@@ -70,69 +98,138 @@
         </div>
         
         <p class="ejercicio-label">PRIMER EJERCICIO</p>
-        <p class="text-label">Luego de escuchar el enunciado, unir con flechas.</p>
-        <button class="audio-button" on:click={() => playAudio('/nivel5.mp3')}>
-          <span
-            ><svg
+        <p class="text-label">Luego de escuchar el enunciado, seleccionar la imagen correcta de la columna izquierda y de la columna derecha.</p>
+        {#if enun1 == 0}
+          <button class="audio-button" on:click={() => playAudio('/nivel5.mp3')}>
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#31356E"
+                class="bi bi-volume-up-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"
+                />
+                <path
+                  d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"
+                />
+                <path
+                  d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"
+                />
+              </svg></span
+            >
+          </button>
+        {/if}
+        {#if enun1 == 1}
+          <div class="enunciadook">
+            <p class="enunciado-text">EL PAPA SACA A PASEAR AL PERRO</p>
+          </div>
+        {/if}
+        {#if enun1 == 2}
+          <div class="enunciadono">
+            <p class="enunciado-text">EL PAPA SACA A PASEAR AL PERRO</p>
+          </div>
+        {/if}
+        
+        <div class="image-container">
+          {#if colum1 == 0}
+            <div class="column">
+              <img src="female teacher.png" alt="femaleteacher" on:click={() => cambiarValor("colum1", 1)} on:keydown={(event) => cambiarValor("colum1", 1)}>
+              <img src="dad necktie.png" alt="dadnecktie" on:click={() => cambiarValor("colum1", 1)} on:keydown={(event) => cambiarValor("colum1", 1)}>
+              <img src="little girl.png" alt="littlegirl" on:click={() => cambiarValor("colum1", 1)} on:keydown={(event) => cambiarValor("colum1", 1)}>
+            </div>
+          {/if}
+          {#if colum1 == 1}
+            <div class="column">
+              <img class="imgno" src="female teacher.png" alt="femaleteacher">
+              <img class="imgok" src="dad necktie.png" alt="dadnecktie">
+              <img class="imgno" src="little girl.png" alt="littlegirl">
+            </div>
+          {/if}
+
+          {#if colum2 == 0}
+            <div class="column">
+              <img src="beagle.png" alt="beagle" on:click={() => cambiarValor("colum2", 1)} on:keydown={(event) => cambiarValor("colum2", 1)}>
+              <img src="duo.png" alt="duo" on:click={() => cambiarValor("colum2", 1)} on:keydown={(event) => cambiarValor("colum2", 1)}>
+              <img src="cat.png" alt="cat" on:click={() => cambiarValor("colum2", 1)} on:keydown={(event) => cambiarValor("colum2", 1)}>
+            </div>
+          {/if}
+          {#if colum2 == 1}
+            <div class="column">
+              <img class="imgok" src="beagle.png" alt="beagle">
+              <img class="imgno" src="duo.png" alt="duo">
+              <img class="imgno" src="cat.png" alt="cat">
+            </div> 
+          {/if}
+        </div>    
+
+        {#if enun1 == 0}
+          <div class="buttons-container">
+            <p>¿Pudo realizar el ejercicio?</p>
+            <button type="button" class="btn btn-danger" on:click={() => cambiarValor("enun1", 2)}><span class="material-icons"><svg
               xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
-              fill="#31356E"
-              class="bi bi-volume-up-fill"
+              width="18"
+              height="18"
+              fill="currentColor"
+              class="bi bi-x-lg"
               viewBox="0 0 16 16"
             >
               <path
-                d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"
+                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
               />
+            </svg></span></button>
+            <button type="button" class="btn btn-success" on:click={() => cambiarValor("enun1", 1)}><span class="material-icons"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              class="bi bi-check-lg"
+              viewBox="0 0 16 16"
+            >
               <path
-                d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"
+                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
               />
+            </svg></span></button>
+          </div>
+        {/if}
+        {#if enun1 == 1}
+          <div class="buttons-container">
+            <p>¿Pudo realizar el ejercicio?</p>
+            <button type="button" class="btn btn-success" on:click={() => cambiarValor("enun1", 1)}><span class="material-icons"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              class="bi bi-check-lg"
+              viewBox="0 0 16 16"
+            >
               <path
-                d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"
+                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
               />
-            </svg></span
-          >
-        </button>
-        <div class="image-container">
-          <div class="column">
-            <img src="female teacher.png" alt="femaleteacher">
-            <img src="dad necktie.png" alt="dadnecktie">
-            <img src="little girl.png" alt="littlegirl">
+            </svg></span></button>
           </div>
-          <div class="column">
-            <img src="beagle.png" alt="beagle">
-            <img src="duo.png" alt="duo">
-            <img src="cat.png" alt="cat">
+        {/if}
+        {#if enun1 == 2}
+          <div class="buttons-container">
+            <p>¿Pudo realizar el ejercicio?</p>
+            <button type="button" class="btn btn-danger" on:click={() => cambiarValor("enun1", 2)}><span class="material-icons"><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              class="bi bi-x-lg"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+              />
+            </svg></span></button>
           </div>
-        </div> 
+        {/if}
 
-        <div class="buttons-container">
-          <p>¿Pudo realizar el ejercicio?</p>
-          <button type="button" class="btn btn-danger"><span class="material-icons"><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            fill="currentColor"
-            class="bi bi-x-lg"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
-            />
-          </svg></span></button>
-          <button type="button" class="btn btn-success"><span class="material-icons"><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            fill="currentColor"
-            class="bi bi-check-lg"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
-            />
-          </svg></span></button>
-        </div>
         <progress value={1}></progress>
         <button type="button" class="btn btn-light" on:click={nextpage}>Finalizar</button>
       </div>
@@ -233,6 +330,38 @@
       align-self: center; 
     }
 
+    .enunciadono {
+      background-color: #d9534f;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+      text-align: center;
+    }
+
+    .enunciadook {
+      background-color: #5cb85c;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+      text-align: center;
+    }
+
+    .enunciado-text {
+      font-size: 12px;
+      color: #FFF;
+      font-weight: bold;
+      margin: 0;
+      padding: 2px 10px;
+    }
+
     .image-container {
       display: flex;
       justify-content: space-around;
@@ -254,6 +383,25 @@
       margin-bottom: 10px;
       margin-top: 20px;
       border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .imgok {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #12e712;
+    }
+
+    .imgno {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #b71c17;
     }
 
     .text-label {
