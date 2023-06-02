@@ -8,7 +8,6 @@
 
 	function registrarDatos() {
 		if (nombreApellido != '' && dni != '') {
-			localStorage.setItem("Nombre", nombreApellido)
 			fetch(`${APIURL}/api/datos/`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
