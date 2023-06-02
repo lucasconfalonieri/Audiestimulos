@@ -4,7 +4,7 @@
 
 	let paciente = undefined;
 
-	const APIURL = import.meta.env.VITE_API_URL;
+	const APIURL = 'https://cuenca-fono.vercel.app';
 	const WEBURL = import.meta.env.VITE_WEB_URL;
 
 	function obtenerPaciente() {
