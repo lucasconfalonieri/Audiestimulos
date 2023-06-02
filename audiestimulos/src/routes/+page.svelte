@@ -8,7 +8,7 @@
 
 	function registrarDatos() {
 		if (nombreApellido != '' && dni != '') {
-			fetch(`${APIURL}/api/datos/`, {
+			fetch(`${APIURL}/api/datos`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ dni: dni, nombre: nombreApellido })
