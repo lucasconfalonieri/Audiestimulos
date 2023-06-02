@@ -3,11 +3,13 @@
 	import { goto } from '$app/navigation';
 
 	let paciente = undefined;
+	let pacienten = undefined;
 
 	const APIURL = 'https://cuenca-fono.vercel.app';
 	const WEBURL = import.meta.env.VITE_WEB_URL;
 
 	function obtenerPaciente() {
+		pacienten = localStorage.getItem("Nombre")
 		fetch(`${APIURL}/api/datos`, {
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
@@ -35,7 +37,7 @@
 	<div class="container">
 		<div class="title">¡FELICIDADES!</div>
 		{#if paciente && paciente.length > 0}
-			<h1 class="text">{paciente[0].Nombre}</h1>
+			<h1 class="text">{pacienten}</h1>
 			<div class="text">Lograste el objetivo</div>
 		{/if}
 		<button type="button" class="btn btn-light" on:click={nextpage}>Inicio</button>
