@@ -3,13 +3,13 @@
 	let dni = '';
 	let fail = undefined;
 
-	const APIURL = import.meta.env.VITE_API_URL;
+	const APIURL = 'https://cuenca-fono.vercel.app';
 	const WEBURL = import.meta.env.VITE_WEB_URL;
 
 	function registrarDatos() {
 		if (nombreApellido != '' && dni != '') {
 			localStorage.setItem("Nombre", nombreApellido)
-			fetch(`${APIURL}/api/datos/`, {
+			fetch(`${APIURL}/api/datos`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ dni: dni, nombre: nombreApellido })
